@@ -2,7 +2,7 @@
 
 Este repositório contém o projeto completo de um bot multifuncional para o Telegram, construído 100% na plataforma de automação n8n.
 
-**Bot no Telegram:** [`@SEU_BOT_AQUI`](https://t.me/SEU_BOT_AQUI) *(<- SUBSTITUA AQUI)*
+**Bot no Telegram:** @TesteLowCoderBot
 
 ---
 
