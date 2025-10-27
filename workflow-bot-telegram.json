@@ -1,0 +1,2426 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2544,
+        -1168
+      ],
+      "id": "eb8e2b9e-2937-43bd-9400-74035d3bb9ec",
+      "name": "Telegram Trigger",
+      "webhookId": "4edf7bf9-9239-4f48-b764-7f5c357a511b",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "Mande o texto que você quer tranformar em pdf. ",
+        "replyMarkup": "=",
+        "forceReply": {},
+        "replyKeyboardOptions": {},
+        "replyKeyboardRemove": {},
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -752,
+        -2048
+      ],
+      "id": "aea29872-74d4-44de-843c-d9615248a7fc",
+      "name": "Send a text message",
+      "webhookId": "d583b3e8-ab62-40dc-b3b9-f24d6cc09ce0",
+      "notesInFlow": false,
+      "retryOnFail": false,
+      "alwaysOutputData": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields').item.json.Mensagem }}",
+                    "rightValue": "/criardocs",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "11bfaeae-9489-42b0-a3bb-bccb6009868e"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "CriarDOCS"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "77590a18-61a4-4a1f-b642-448177325946",
+                    "leftValue": "={{ $('Edit Fields').item.json.Mensagem }}",
+                    "rightValue": "/inserirtextimg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "inserirTEXTOIMG"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d3b43b85-8aaf-4e28-b553-fdddc6e2dffd",
+                    "leftValue": "={{ $('Edit Fields').item.json.Mensagem }}",
+                    "rightValue": "/buscarnoticia",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "buscarNoticia"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "52011f99-55f0-4d8d-919f-9e9b591ebef3",
+                    "leftValue": "={{ $('Edit Fields').item.json.Mensagem }}",
+                    "rightValue": "/transcreveraudio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "TranscreverAudio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "87e0ff60-d0c0-44d5-a736-8edb89958176",
+                    "leftValue": "={{ $('Edit Fields').item.json.Mensagem }}",
+                    "rightValue": "/",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notStartsWith"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "errorMessage"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1264,
+        -1488
+      ],
+      "id": "597c92bb-5e73-4270-a7e2-fc67ddc01b44",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1TE5JSC2TVWdDyM56-tyqi6GRujv4i_HZQiciKikvhdw",
+          "mode": "list",
+          "cachedResultName": "papel timbrado base",
+          "cachedResultUrl": "https://docs.google.com/document/d/1TE5JSC2TVWdDyM56-tyqi6GRujv4i_HZQiciKikvhdw/edit?usp=drivesdk"
+        },
+        "name": "CopiaDoUsuario",
+        "options": {
+          "copyRequiresWriterPermission": false
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1088,
+        -832
+      ],
+      "id": "179e2354-3b32-4eb6-b550-c2afce1efc54",
+      "name": "Copy file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Edit Fields').item.json.Mensagem }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -896,
+        -832
+      ],
+      "id": "de39b6ff-ff47-480c-af16-2ce93cf6988e",
+      "name": "Update a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "uKBTX6RUYb3SUNUi",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "file": "={{ $json[\"\"] }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -304,
+        -832
+      ],
+      "id": "64de7e86-2886-4b95-91eb-6b08a83ed559",
+      "name": "Send a document",
+      "webhookId": "24f9f7a5-42ec-4a1d-92f3-93599b94c3cd",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -688,
+        -832
+      ],
+      "id": "334489de-d44b-4888-9d29-d4a936e37b8f",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3d7e7fe2-9ba8-4a55-aca1-f74de46002af",
+              "name": "",
+              "value": "=https://docs.google.com/document/d/{{ $('Copy file').item.json.id }}/export?format=pdf ",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        -832
+      ],
+      "id": "eb1eb937-0b08-48b0-9a16-aafd91e53f53",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -832
+      ],
+      "id": "396c32e3-34e8-48f2-81cd-84395912b23b",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "O escopo do arquivo está definido assim: \n\n<<img>>\n\n\n<<texto>>\n\nPorém, vamos fazer passo a passo. Envie seu texto!",
+        "replyMarkup": "=",
+        "forceReply": {},
+        "replyKeyboardOptions": {},
+        "replyKeyboardRemove": {},
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -752,
+        -1856
+      ],
+      "id": "37587670-dcb5-499b-b2a9-e5021d19424f",
+      "name": "Send a text message1",
+      "webhookId": "d583b3e8-ab62-40dc-b3b9-f24d6cc09ce0",
+      "notesInFlow": false,
+      "retryOnFail": false,
+      "alwaysOutputData": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -1856
+      ],
+      "id": "bbda1970-6383-4abb-b075-6a39c4d47726",
+      "name": "No Operation, do nothing2"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Edit Fields').item.json.message.photo[0].file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1120,
+        -448
+      ],
+      "id": "00f7d415-b4eb-4d17-8fe6-15f05ce33270",
+      "name": "Get a file",
+      "webhookId": "0d41511a-12fb-4f3c-a7ce-e1fb359de913",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "imgusuario",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -960,
+        -448
+      ],
+      "id": "4cce9546-d320-4c01-8f83-50a88ac3c1a9",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -768,
+        -448
+      ],
+      "id": "92958a4a-1e7d-421f-a3ab-a0dc164a24fe",
+      "name": "Share file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://script.google.com/macros/s/AKfycbzOXU_XQ6yuBK_69HHCJ7LvI-iuXyGg3DPWlCObEx842ZAjd0N_PIRzjCpPCZMxjubL/exec",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"docId\": \"{{ $('Get a document').item.json.documentId }}\",\n  \"imageUrl\": \"{{ $('Upload file').item.json.webContentLink }}\",\n  \"placeholder\": \"<<img>>\"\n} ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        -448
+      ],
+      "id": "bc3da646-781c-4015-af8c-d166c874379a",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0ce4318b-ae49-4aff-98a4-fae6daf63ff6",
+              "name": "IdConversa",
+              "value": "={{ $json.message.from.id }}",
+              "type": "number"
+            },
+            {
+              "id": "af2ea38a-fb39-49b1-813d-5b1f32a3d4f0",
+              "name": "Mensagem",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "e6d51455-0087-48d7-977d-c2513152e63c",
+              "name": "message.photo[0].file_id",
+              "value": "={{ $json.message.photo[0].file_id }}",
+              "type": "string"
+            },
+            {
+              "id": "105c25c3-553d-44a6-852e-30d4e971702f",
+              "name": "EstadoAtual",
+              "value": "={{ $json[\"Get row(s) in sheet\"].json.Estado || \"default\" }}",
+              "type": "string"
+            },
+            {
+              "id": "a448bed4-41d5-44d0-9ecd-387cd30931da",
+              "name": "audio",
+              "value": "={{ $json.message.voice.file_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2368,
+        -1168
+      ],
+      "id": "20839148-ef0d-4908-b336-2a669f331e93",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f0cc7fde-faf2-43e3-9590-38888de1548c",
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "=",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "default"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "=aguardando_texto_pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "a5bff5a1-1a38-4f54-87e8-b5b4483363d2"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Textoempdf"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "c222efb1-0902-47d2-9009-8be82453e7ea",
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "aguardando_texto_marcador",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "inserirtexto"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4681519f-cf5c-4ec2-aa16-a5243c164862",
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "aguardando_envio_da_img",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "inserirImg"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5dedabc3-11df-4c45-a956-5b6fa123f457",
+                    "leftValue": "={{ $json.Estado }}",
+                    "rightValue": "aguardando_envio_de_audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "transcrever_audio"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1760,
+        -1200
+      ],
+      "id": "d7e70cfc-f26a-4828-831a-50e6069dd697",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "aguardando_texto_pdf",
+            "ChatID": "={{ $('Get row(s) in sheet').item.json.ChatID }}"
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -544,
+        -2048
+      ],
+      "id": "461eaf4c-0e3c-47f2-9f55-f4d23190b30e",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "aguardando_texto_marcador",
+            "ChatID": "={{ $json.result.chat.id }}"
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -544,
+        -1856
+      ],
+      "id": "e40e7c2f-b15c-4d04-9d51-e3ba8071a3d2",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "1HPKjw1BPbdWHFg2WIwKJqZLX8VMO6L_KT-Hm_3qhjpw",
+          "mode": "list",
+          "cachedResultName": "papel_timbrado_with_markers",
+          "cachedResultUrl": "https://docs.google.com/document/d/1HPKjw1BPbdWHFg2WIwKJqZLX8VMO6L_KT-Hm_3qhjpw/edit?usp=drivesdk"
+        },
+        "name": "usuario_markers_pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1120,
+        -640
+      ],
+      "id": "d55845a7-4b4c-4698-b935-bf05ab76172a",
+      "name": "Copy file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "<<texto>>",
+              "replaceText": "={{ $('Edit Fields').item.json.Mensagem }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -912,
+        -640
+      ],
+      "id": "6d594818-f495-4889-a68a-25dac4ae8dfa",
+      "name": "Update a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "uKBTX6RUYb3SUNUi",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "writer",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -752,
+        -640
+      ],
+      "id": "20e09cea-0e31-4e9b-9dd6-10def1864b37",
+      "name": "Share file3",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s42c0Q8Rlsfkq3DhRktE2VRfCYCvMs28XbVlH1fxITI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ChatID": "={{ $('Edit Fields').item.json.IdConversa }}",
+            "Estado": "aguardando_envio_da_img",
+            "DadosTemporarios": "={{ $('Update a document1').item.json.documentId }}"
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -560,
+        -640
+      ],
+      "id": "34a8c6f5-1aea-48e3-91e4-7a4ee0788291",
+      "name": "Append or update row in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s42c0Q8Rlsfkq3DhRktE2VRfCYCvMs28XbVlH1fxITI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ChatID": "={{ $('Get row(s) in sheet').item.json.ChatID }}",
+            "Estado": "",
+            "DadosTemporarios": ""
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        464,
+        -448
+      ],
+      "id": "37109630-b3c5-4827-a27d-988d761371f3",
+      "name": "Append or update row in sheet4",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s42c0Q8Rlsfkq3DhRktE2VRfCYCvMs28XbVlH1fxITI/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "ChatID",
+              "lookupValue": "={{ $('Get row(s) in sheet').item.json.ChatID }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -608,
+        -448
+      ],
+      "id": "27c39160-4e94-4b75-a68c-452020bb5ed0",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "={{ $json.DadosTemporarios }}"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -464,
+        -448
+      ],
+      "id": "1b403047-0e1b-44af-8119-7a3a701bbd57",
+      "name": "Get a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "uKBTX6RUYb3SUNUi",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.documentId }}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "writer",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -272,
+        -448
+      ],
+      "id": "d50aa9f5-1192-4deb-abd9-a28d7ab7b75b",
+      "name": "Share file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "C5TluDdCys9B9LeO",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "58b233bf-a2a8-4a38-ab0d-2fb6aed9dd66",
+              "name": "docs",
+              "value": "=https://docs.google.com/document/d/{{ $('Get a document').item.json.documentId }}/export?format=pdf\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        128,
+        -448
+      ],
+      "id": "b117af7e-a9db-49aa-9f7d-df91d5acd5e7",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "file": "={{ $json.docs }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        304,
+        -448
+      ],
+      "id": "2cd1e192-bc0a-4a8a-bed2-06e3cd9bd091",
+      "name": "Send a document1",
+      "webhookId": "2c8f0834-e321-46bc-90c1-93891df73b6b",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        864,
+        -448
+      ],
+      "id": "b6817f88-ea76-4777-92e0-95c1773d57bc",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -2048
+      ],
+      "id": "fc6121ba-3069-427b-8ba8-ac66d8c71f7c",
+      "name": "No Operation, do nothing3"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ChatID": "={{ $json.IdConversa }}"
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2192,
+        -1168
+      ],
+      "id": "99a067a3-8c78-4b27-b8d1-aba187357ee0",
+      "name": "Append or update row in sheet5",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "ChatID",
+              "lookupValue": "={{ $json.ChatID }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1984,
+        -1168
+      ],
+      "id": "57c16591-50c0-4659-8a77-6a24f4236a77",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://g1.globo.com/rss/g1/",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -752,
+        -1696
+      ],
+      "id": "fbad041e-7e0e-415f-9db7-344788ccdd24",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega a lista de notícias que veio do nó HTTP Request\nconst noticias = $json.rss.channel.item;\n\n// Limita a lista para apenas as 5 primeiras\nconst top5 = noticias.slice(0, 5);\n\nlet mensagemFormatada = \"Aqui estão as 5 principais notícias do G1:\\n\\n\";\n\n// Loop para criar a mensagem\nfor (const noticia of top5) {\n  // Adiciona o título e o link de cada notícia\n  mensagemFormatada += `• ${noticia.title} - ${noticia.link}\\n\\n`;\n}\n\n// Retorna a mensagem formatada para o próximo nó\nreturn {\n  mensagemFinal: mensagemFormatada\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -384,
+        -1696
+      ],
+      "id": "70b093fb-e29b-4d9e-8983-4337bfcfe4f1",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        -1696
+      ],
+      "id": "b10fd0b2-e88a-4931-a6a9-993c031d0b0d",
+      "name": "XML"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "={{ $json.mensagemFinal }}",
+        "additionalFields": {
+          "appendAttribution": false,
+          "disable_web_page_preview": true
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -176,
+        -1696
+      ],
+      "id": "2f2c428e-7c24-42ed-af96-0d21e125db42",
+      "name": "Send a text message2",
+      "webhookId": "802dcd82-db98-4afa-8c6c-d5bc2ed6ab5e",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        32,
+        -1696
+      ],
+      "id": "0cc77394-c93b-4fec-a624-bf7b32d3cc01",
+      "name": "No Operation, do nothing4"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "Agora, você só precisa enviar seu áudio para podermos transcrever.\n\nDicas para que o resultado seja do seu agrado: \n\n1 - Fale com calma.\n\n2 - Procure um lugar que não faça muito barulho.\n\n3 - Tente não demorar muito entre uma fala e outra.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -736,
+        -1520
+      ],
+      "id": "6e2ff6c9-6ebc-4a1a-835e-b3950cdc0c05",
+      "name": "EnvieSeuAudio",
+      "webhookId": "1833faa5-23c6-4714-a565-3fd06d05fd45",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "aguardando_envio_de_audio",
+            "ChatID": "={{ $('Get row(s) in sheet').item.json.ChatID }}"
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -528,
+        -1520
+      ],
+      "id": "9be6b573-3689-4653-82cb-57ab62fa9eb5",
+      "name": "aguardando_envio_audio",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -1520
+      ],
+      "id": "3bff7a0c-ac80-4568-8f43-75d983d1ef2a",
+      "name": "No Operation, do nothing5"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Edit Fields').item.json.audio }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1120,
+        -272
+      ],
+      "id": "61023112-9994-4102-bf2c-acc32ea09cd2",
+      "name": "Get a file1",
+      "webhookId": "2d194936-68ac-4411-9a3d-9c050bec8199",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1s42c0Q8Rlsfkq3DhRktE2VRfCYCvMs28XbVlH1fxITI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ChatID": "={{ $('Edit Fields').item.json.IdConversa }}",
+            "Estado": ""
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -144,
+        -832
+      ],
+      "id": "55ffe579-0854-4dbd-a4f2-f93ebd0a1f36",
+      "name": "Append or update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.gladia.io/audio/text/audio-transcription/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "audio",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -912,
+        -272
+      ],
+      "id": "53128854-13a6-4c1d-907b-ec9e9e0127d7",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "p92iwDmDPG823JT5",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "=Transcrição:\n\n{{ $json.prediction.map(segmento => segmento.transcription).join(' ') }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -704,
+        -272
+      ],
+      "id": "b3f1fca7-786b-417b-835d-483f99081ffa",
+      "name": "Send a text message3",
+      "webhookId": "325db80a-47ea-458a-bb9d-3fba1dae1206",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4",
+          "mode": "list",
+          "cachedResultName": "EstadoBots",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Página1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/134NT3N-0lK5wIXg3REMQNo7OL44W0pIpdmbljFGlq_4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ChatID": "={{ $('Get row(s) in sheet').item.json.ChatID }}",
+            "Estado": ""
+          },
+          "matchingColumns": [
+            "ChatID"
+          ],
+          "schema": [
+            {
+              "id": "ChatID",
+              "displayName": "ChatID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DadosTemporarios",
+              "displayName": "DadosTemporarios",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -496,
+        -272
+      ],
+      "id": "7ac8f95d-4e1e-4735-9d16-9b946fa7837e",
+      "name": "Append or update row in sheet6",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "myv1zEHnEPWaXp5Q",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -272
+      ],
+      "id": "e4128bf9-c627-40f0-ba71-506da6daccd0",
+      "name": "No Operation, do nothing6"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -640
+      ],
+      "id": "7d2e790f-2ab5-43e2-b7a2-e367eab8d413",
+      "name": "No Operation, do nothing7"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "Para começar o uso do nosso ChatBot, execute algum dos seguintes comandos: \n\n/criardocs\n/inserirtextimg\n/buscarnoticia\n/transcreveraudio\n\nFicaremos felizes em te ajudar!! ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -912,
+        -1408
+      ],
+      "id": "7e15100f-15dd-49ff-9616-68be5da5155a",
+      "name": "Send a text message4",
+      "webhookId": "5b9951b9-91ef-4d34-994e-a4770fed12fa",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "Aqui está seu texto, agora é só baixar!!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        64,
+        -832
+      ],
+      "id": "40d23a56-36de-4f06-9b90-db721173617a",
+      "name": "Send a text message5",
+      "webhookId": "af0609bc-e8f8-4ce1-9e9a-c7012ed38bd5",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "Seu texto está salvo!! \n\nAgora mande a imagem que você quer no arquivo.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -352,
+        -640
+      ],
+      "id": "1823a765-290b-4af0-999e-d3d7d7bfb1ef",
+      "name": "Send a text message6",
+      "webhookId": "ef69c6b1-d573-45b7-9487-d6ef1f582956",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Edit Fields').item.json.IdConversa }}",
+        "text": "Pronto!! \n\nSeu texto e sua imagem já foram anexadas no arquivo, agora é só baixar!!",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        -448
+      ],
+      "id": "d8f60728-b30b-428f-b028-b6c0cac46eac",
+      "name": "Send a text message7",
+      "webhookId": "64850d7c-71fe-44d5-8735-8f7702644d76",
+      "credentials": {
+        "telegramApi": {
+          "id": "X35cPM5jW5JYy08n",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "EnvieSeuAudio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copy file": {
+      "main": [
+        [
+          {
+            "node": "Update a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a document": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Send a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Share file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Copy file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Copy file2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get a file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Copy file2": {
+      "main": [
+        [
+          {
+            "node": "Update a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document1": {
+      "main": [
+        [
+          {
+            "node": "Share file3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file3": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Send a text message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet4": {
+      "main": [
+        [
+          {
+            "node": "Send a text message7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Get a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a document": {
+      "main": [
+        [
+          {
+            "node": "Share file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a document1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet5": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message2": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EnvieSeuAudio": {
+      "main": [
+        [
+          {
+            "node": "aguardando_envio_audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "aguardando_envio_audio": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Send a text message5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message3": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet6": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message5": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message6": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message7": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5ce6decf4206e991ce858595e33a3de09f49f2413319fca49c59bff7e9be7e92"
+  }
+}
